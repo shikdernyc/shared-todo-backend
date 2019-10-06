@@ -1,0 +1,38 @@
+{
+  "name": "backend-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@hapi/joi": "^16.0.0",
+    "aws-sdk": "^2.505.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.3",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
+    "nodemon": "^1.18.10",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.1.4"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js",
+    "file": "nodemon --exec babel-node",
+    "test": "./node_modules/mocha/bin/mocha tests/**/*Test.js --reporter spec --exit"
+  },
+  "author": "shikdertech.io",
+  "license": "ISC"
+}

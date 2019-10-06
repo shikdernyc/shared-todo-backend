@@ -1,0 +1,1 @@
+export const MODEL_DNE = Error("Model doesn't exist")
