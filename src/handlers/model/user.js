@@ -18,8 +18,8 @@ export default class UserModel extends Model {
       await userSchema.validateAsync(userData) // validates userData format
       // TODO: Validate that no other user exists with the same email
 	  
-	  var duplicateEmails = await User.collection("fullName").find({ email : userData.email }).toArray()
-	  if(duplicateEmails.length > 0){
+	  var duplicateEmails = await User.collection("fullName").findOne({ email : userData.email })
+	  if(duplicateEmails != null){
 		  throw new Error('Bruh. That email is already linked to another account.')
 	  }
 	  
@@ -47,11 +47,11 @@ export default class UserModel extends Model {
   static async validate(email, password) {
     try {
       // TODO: Validate user's email and password
-	var storedHashPW = await User.collection("password").findOne({ email : email }).toArray()
-	if(storedHashPW.length == 0 || !validateHash(password, storedHashPW[0]){
+	var storedUser = await User.collection.findOne({ email : email })
+	if(storedUser == null || !validateHash(password, storedUser.password){
 		throw new Error('That login info is incorrect')
 	} else {
-		return ; //Suppose to return UserModel of existing User
+		return new User(storedUser)
 	}
 
     } catch (error) {
