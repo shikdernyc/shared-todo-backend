@@ -20,7 +20,7 @@ export default class UserModel extends Model {
 	  
 	  var duplicateEmails = await User.collection("fullName").find({ email : userData.email }).toArray()
 	  if(duplicateEmails.length > 0){
-		  return ;//Some error object to display that email already has an account
+		  throw new Error('Bruh. That email is already linked to another account.')
 	  }
 	  
       // TODO: hash user's password using the hash method
@@ -47,8 +47,12 @@ export default class UserModel extends Model {
   static async validate(email, password) {
     try {
       // TODO: Validate user's email and password
-	  var storedHashPW = await User.collection("password").findOne({ email : email }).toArray()
-	  return validateHash(password, storedHashPW[0]) //I don't know what to return
+	var storedHashPW = await User.collection("password").findOne({ email : email }).toArray()
+	if(storedHashPW.length == 0 || !validateHash(password, storedHashPW[0]){
+		throw new Error('That login info is incorrect')
+	} else {
+		return ; //Suppose to return UserModel of existing User
+	}
 
     } catch (error) {
       throw error
